@@ -205,7 +205,7 @@ const TableItem = ({ Id, nombre, userName, rol, estado, refresh }) => {
           <i class="bx bx-edit-alt hover:text-yellow-300" aria-label="Editar"></i>
         </Link>
         </Tooltip>
-        <Tooltip title='Borrar Producto' arrow>
+        <Tooltip title='Borrar Usuario' arrow>
         <button
           className="pl-4"
           onClick={(x) => {
