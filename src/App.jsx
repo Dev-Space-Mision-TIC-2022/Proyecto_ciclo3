@@ -12,6 +12,7 @@ import DetalleUsuario from "./pages/admin/Detalle-Usuario";
 import DetalleProducto from "./pages/admin/Detalle-producto";
 import DetalleVenta from "./pages/admin/Detalle-Venta";
 import { Auth0Provider } from "@auth0/auth0-react";
+import CrearUsuario from "./pages/admin/Crear-Usuario";
 
 function App() {
   return (
@@ -25,6 +26,11 @@ function App() {
           <Switch>
             <Route path={["/admin"]}>
               <Switch>
+                <Route path="/admin/crear-usuario">
+                  <Admin>
+                    <CrearUsuario />
+                  </Admin>
+                </Route>
                 <Route path="/admin/detalle-usuario/:id">
                   <Admin>
                     <DetalleUsuario />
@@ -35,7 +41,6 @@ function App() {
                     <Usuarios />
                   </Admin>
                 </Route>
-                {/* TODO: Route para detalle venta con :id */}
                 <Route path="/admin/detalle-Venta/:id">
                   <Admin>
                     <DetalleVenta />

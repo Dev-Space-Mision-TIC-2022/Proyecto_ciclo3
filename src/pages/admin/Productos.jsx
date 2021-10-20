@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import "./Main.css";
 import _, { filter } from "underscore";
-import { Dialog, Tooltip } from '@material-ui/core';
+import { Dialog, Tooltip } from "@material-ui/core";
 
 const Productos = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
@@ -19,9 +19,8 @@ const Productos = () => {
   const ObtenerProductos = async () => {
     const options = {
       method: "GET",
-      url: "https://api.appery.io/rest/1/db/collections/Productos/",
+      url: "http://localhost:5000/Productos/",
       headers: {
-        "X-Appery-Database-Id": "615884472e22d70eed30f6a8",
         "Content-Type": "application/json",
       },
     };
@@ -163,20 +162,21 @@ const TableItem = ({ nombre, valor, inventario, desc, Id, refresh }) => {
       if (result.isConfirmed) {
         const options = {
           method: "DELETE",
-          url: `https://api.appery.io/rest/1/db/collections/Productos/${Id}`,
+          url: `http://localhost:5000/Productos/${Id}`,
           headers: {
-            "X-Appery-Database-Id": "615884472e22d70eed30f6a8",
             "Content-Type": "application/json",
           },
         };
         await axios
           .request(options)
           .then(function (response) {
-            Swal.fire("Borrado!", "Tu producto ha sido borrado", "success").then(
-              (x) => {
-                refresh();
-              }
-            );
+            Swal.fire(
+              "Borrado!",
+              "Tu producto ha sido borrado",
+              "success"
+            ).then((x) => {
+              refresh();
+            });
           })
           .catch(function (error) {
             console.error(error);
@@ -205,20 +205,23 @@ const TableItem = ({ nombre, valor, inventario, desc, Id, refresh }) => {
       <td className="p-3 font-bold">{inventario}</td>
 
       <td className="p-3">
-        <Tooltip title='Editar Producto' arrow>
-        <Link to={`/admin/detalle-producto/${Id}`}>
-          <i className="bx bx-edit-alt hover:text-yellow-300" aria-label="Editar"></i>
-        </Link>
+        <Tooltip title="Editar Producto" arrow>
+          <Link to={`/admin/detalle-producto/${Id}`}>
+            <i
+              className="bx bx-edit-alt hover:text-yellow-300"
+              aria-label="Editar"
+            ></i>
+          </Link>
         </Tooltip>
-        <Tooltip title='Borrar Producto' arrow>
-        <button
-          className="pl-4"
-          onClick={(x) => {
-            borrarItem();
-          }}
-        >
-          <i className="bx bx-trash hover:text-red-600"></i>
-        </button>
+        <Tooltip title="Borrar Producto" arrow>
+          <button
+            className="pl-4"
+            onClick={(x) => {
+              borrarItem();
+            }}
+          >
+            <i className="bx bx-trash hover:text-red-600"></i>
+          </button>
         </Tooltip>
       </td>
     </tr>

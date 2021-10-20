@@ -12,7 +12,7 @@ const PrivateRoute = ({children}) => {
     return isAuthenticated ?(
         <>{children}</>
         
-    ): (<div className= "font-semibold text-center text-8xl">No esta autenticado</div>)
+    ): (<div className= "font-semibold text-center text-8xl"></div>)
 }
 
 export default PrivateRoute

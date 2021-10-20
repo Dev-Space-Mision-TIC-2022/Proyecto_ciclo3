@@ -18,9 +18,8 @@ const DetalleUsuario = () => {
     const ObtenerUsuario = async () => {
       const options = {
         method: "GET",
-        url: `https://api.appery.io/rest/1/db/collections/Usuarios/${id}`,
+        url: `http://localhost:5000/Usuarios/${id}`,
         headers: {
-          "X-Appery-Database-Id": "615884472e22d70eed30f6a8",
           "Content-Type": "application/json",
         },
       };
@@ -28,11 +27,11 @@ const DetalleUsuario = () => {
         .request(options)
         .then(function (response) {
           // response.data
-          setUsuario(response.data);
-          setNombre(response.data.Nombre);
-          setUserName(response.data.userName);
-          setRol(response.data.Rol);
-          setEstado(response.data.Estado);
+          setUsuario(response.data[0]);
+          setNombre(response.data[0].Nombre);
+          setUserName(response.data[0].UserName);
+          setRol(response.data[0].Rol);
+          setEstado(response.data[0].Estado);
         })
         .catch(function (error) {
           console.error(error);
@@ -47,17 +46,16 @@ const DetalleUsuario = () => {
 
   const guardar = async () => {
     const options = {
-      method: "PUT",
-      url: `https://api.appery.io/rest/1/db/collections/Usuarios/${id}`,
+      method: "PATCH",
+      url: `http://localhost:5000/Usuarios/${id}`,
       headers: {
-        "X-Appery-Database-Id": "615884472e22d70eed30f6a8",
         "Content-Type": "application/json",
       },
       data: {
         Nombre: nombre,
         Rol: rol,
         Estado: estado,
-        userName: userName,
+        UserName: userName,
       },
     };
     console.log(options);

@@ -15,16 +15,15 @@ const CrearVenta = () => {
   const guardar = async () => {
     const options = {
       method: "POST",
-      url: "https://api.appery.io/rest/1/db/collections/Ventas/",
+      url: "http://localhost:5000/Ventas/",
       headers: {
-        "X-Appery-Database-Id": "615884472e22d70eed30f6a8",
         "Content-Type": "application/json",
       },
       data: {
         Name: nombre,
         Quantity: nroItems,
         ValuePerUnit: valor,
-        Fecha: fecha,
+        fecha: fecha,
         Total: nroItems * valor,
         NombreCliente: nomcliente,
         IdCliente: idCliente,
@@ -55,7 +54,10 @@ const CrearVenta = () => {
       <div className="flex-col w-full h-full">
         <form className="flex flex-col w-full p-10 px-8 pt-6 mx-auto my-6 mb-4 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-1/2">
           <div className="relative pt-4">
-            <label for="name" className="text-base leading-7 text-blueGray-500 font-semibold">
+            <label
+              for="name"
+              className="text-base leading-7 text-blueGray-500 font-semibold"
+            >
               Nombre del Producto
             </label>
             <input
@@ -90,7 +92,10 @@ const CrearVenta = () => {
             />
           </div>
           <div className="relative pt-4">
-            <label for="name" className="text-base leading-7 text-blueGray-500 font-semibold">
+            <label
+              for="name"
+              className="text-base leading-7 text-blueGray-500 font-semibold"
+            >
               Fecha de venta
             </label>
             <input
@@ -106,7 +111,10 @@ const CrearVenta = () => {
             />
           </div>
           <div className="relative pt-4">
-            <label for="name" className="text-base leading-7 text-blueGray-500 font-semibold">
+            <label
+              for="name"
+              className="text-base leading-7 text-blueGray-500 font-semibold"
+            >
               Identificación del cliente
             </label>
             <input
@@ -120,10 +128,12 @@ const CrearVenta = () => {
               placeholder="Id cliente"
               className="w-full px-4 py-2 mt-2 mr-4 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-gray-100 focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
             />
-            
           </div>
           <div className="relative pt-4">
-            <label for="name" className="text-base leading-7 text-blueGray-500 font-semibold">
+            <label
+              for="name"
+              className="text-base leading-7 text-blueGray-500 font-semibold"
+            >
               Nombre Cliente
             </label>
             <input
@@ -137,7 +147,6 @@ const CrearVenta = () => {
               placeholder="Nombre Cliente"
               className="w-full px-4 py-2 mt-2 mr-4 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-gray-100 focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
             />
-            
           </div>{" "}
           <div className="relative pt-4">
             <label

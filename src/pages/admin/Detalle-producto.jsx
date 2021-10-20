@@ -18,9 +18,8 @@ const DetalleProducto = () => {
     const ObtenerProducto = async () => {
       const options = {
         method: "GET",
-        url: `https://api.appery.io/rest/1/db/collections/Productos/${id}`,
+        url: `http://localhost:5000/Productos/${id}`,
         headers: {
-          "X-Appery-Database-Id": "615884472e22d70eed30f6a8",
           "Content-Type": "application/json",
         },
       };
@@ -30,10 +29,10 @@ const DetalleProducto = () => {
           // response.data
           console.log(response);
           setProducto(response.data);
-          setNombre(response.data.Nombre);
-          setValor(response.data.Valor);
-          setInventario(response.data.inventario);
-          setDesc(response.data.Descripcion);
+          setNombre(response.data[0].Nombre);
+          setValor(response.data[0].Valor);
+          setInventario(response.data[0].inventario);
+          setDesc(response.data[0].Descripcion);
         })
         .catch(function (error) {
           console.error(error);
@@ -47,10 +46,9 @@ const DetalleProducto = () => {
 
   const guardar = async () => {
     const options = {
-      method: "PUT",
-      url: `https://api.appery.io/rest/1/db/collections/Productos/${id}`,
+      method: "PATCH",
+      url: `http://localhost:5000/Productos/${id}`,
       headers: {
-        "X-Appery-Database-Id": "615884472e22d70eed30f6a8",
         "Content-Type": "application/json",
       },
       data: {

@@ -1,28 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const CrearProducto = () => {
-  const [valor, setValor] = useState(0);
+const CrearUsuario = () => {
+  //   let { id } = useParams();
+
+  const [estado, setEstado] = useState("");
   const [nombre, setNombre] = useState("");
-  const [inventario, setInventario] = useState(0);
-  const [desc, setDesc] = useState("");
+  const [rol, setRol] = useState("");
+  const [userName, setUserName] = useState("");
+  const [usuario, setUsuario] = useState([]);
 
   const guardar = async () => {
     const options = {
       method: "POST",
-      url: "http://localhost:5000/Productos/",
+      url: `http://localhost:5000/Usuarios/`,
       headers: {
         "Content-Type": "application/json",
       },
       data: {
         Nombre: nombre,
-        Descripcion: desc,
-        Valor: valor,
-        inventario: inventario,
+        Rol: rol,
+        Estado: estado,
+        UserName: userName,
       },
     };
-
     console.log(options);
     await axios
       .request(options)
@@ -30,9 +33,9 @@ const CrearProducto = () => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Producto guardado con exito",
+          title: "Usuario Creado con exito",
           showConfirmButton: false,
-          timer: 2500,
+          timer: 1500,
         }).then((x) => {});
       })
       .catch(function (error) {
@@ -41,82 +44,89 @@ const CrearProducto = () => {
   };
 
   return (
-    <div className="flex-row h-full items-center justify-center min-h-screen min-w-full px-5 py-12 lg:px-20 bg-gray-900">
-      <div className="flex-col text-green-400 text-3xl ">
-        Registrar Producto
+    <div className="flex-row items-center justify-center min-h-screen min-w-full px-5 py-12 lg:px-20 bg-gray-900">
+      <div className="flex-col w-full text-green-400 text-3xl ">
+        Usuario: {nombre}
       </div>
-      <div className="flex-col w-full">
+      <div className="flex-col w-full ">
         <form className="flex flex-col w-full p-10 px-8 pt-6 mx-auto my-6 mb-4 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-1/2 ">
           <div className="relative pt-4">
-            <label for="name" className="text-base leading-7 text-blueGray-500">
-              Nombre del Producto
+            <label
+              htmlFor="name"
+              className="text-base leading-7 text-blueGray-500"
+            >
+              Nombre
             </label>
             <input
               required
+              value={nombre}
               onChange={(x) => {
                 setNombre(x.target.value);
               }}
               type="text"
               id="name"
               name="name"
-              placeholder="Nombre del producto"
+              placeholder="Nombre"
               className="w-full px-4 py-2 mt-2 mr-4 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-gray-100 focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
             />
           </div>
           <div className="relative pt-4">
             <label
-              for="name"
+              htmlFor="name"
               className="text-base leading-7 text-blueGray-500 text-center"
             >
-              Descripción
+              Nombre de usuario
             </label>
             <input
               required
+              value={userName}
               onChange={(x) => {
-                setDesc(x.target.value);
+                setUserName(x.target.value);
               }}
               type="text"
               id="desc"
               name="desc"
-              placeholder="Descripción"
+              placeholder="User Name"
               className="w-full px-4 py-2 mt-2 mr-4 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-gray-100 focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
             />
           </div>
           <div className="relative pt-4">
             <label
-              for="name"
+              htmlFor="name"
               className="text-base leading-7 text-blueGray-500 m-4"
             >
-              Inventario
+              Rol
             </label>
             <input
               required
+              value={rol}
               onChange={(x) => {
-                setInventario(x.target.value);
+                setRol(x.target.value);
               }}
-              type="number"
-              id="inventario"
-              name="Inventario"
-              placeholder="Cantidad de items disponibles"
+              type="text"
+              id="rol"
+              name="Rol"
+              placeholder="rol del usuario"
               className="w-full px-4 py-2 mt-2 mr-4 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-gray-100 focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
             />
           </div>
           <div className="relative pt-4">
             <label
-              for="name"
+              htmlFor="name"
               className="text-base leading-7 text-blueGray-500 m-4"
             >
-              Valor
+              Estado
             </label>
             <input
               required
+              value={estado}
               onChange={(x) => {
-                setValor(x.target.value);
+                setEstado(x.target.value);
               }}
-              type="number"
-              id="valor"
-              name="valor"
-              placeholder="Costo por unidad"
+              type="text"
+              id="Estado"
+              name="Estado"
+              placeholder="Estado"
               className="w-full px-4 py-2 mt-2 mr-4 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-gray-100 focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
             />
           </div>
@@ -127,7 +137,7 @@ const CrearProducto = () => {
                 guardar();
               }}
               className="w-full py-3 text-base text-white transition duration-500 ease-in-out transform bg-green-400  rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-green-900 "
-              value={"Guardar"}
+              value={"Crear Usuario"}
             />
           </div>
         </form>
@@ -136,4 +146,4 @@ const CrearProducto = () => {
   );
 };
 
-export default CrearProducto;
+export default CrearUsuario;

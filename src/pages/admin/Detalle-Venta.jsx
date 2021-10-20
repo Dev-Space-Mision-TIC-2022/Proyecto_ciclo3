@@ -21,9 +21,8 @@ const DetalleVenta = () => {
     const ObtenerVenta = async () => {
       const options = {
         method: "GET",
-        url: `https://api.appery.io/rest/1/db/collections/Ventas/${id}`,
+        url: `http://localhost:5000/Ventas/${id}`,
         headers: {
-          "X-Appery-Database-Id": "615884472e22d70eed30f6a8",
           "Content-Type": "application/json",
         },
       };
@@ -32,15 +31,15 @@ const DetalleVenta = () => {
         .then(function (response) {
           // response.data
           console.log(response);
-          console.log(response.data.Fecha.split("T")[0]);
-          setVentas(response.data);
-          setNombre(response.data.Name);
-          setCantidad(response.data.Quantity);
-          setValor(response.data.ValuePerUnit);
-          setFecha(response.data.Fecha.split("T")[0]);
-          setTotal(response.data.Total);
-          setIdCliente(response.data.IdCliente)
-          setNomcliente(response.data.NombreCliente)
+          console.log(response.data[0].fecha.split("T")[0]);
+          setVentas(response.data[0]);
+          setNombre(response.data[0].Name);
+          setCantidad(response.data[0].Quantity);
+          setValor(response.data[0].ValuePerUnit);
+          setFecha(response.data[0].fecha.split("T")[0]);
+          setTotal(response.data[0].Total);
+          setIdCliente(response.data[0].IdCliente);
+          setNomcliente(response.data[0].NombreCliente);
         })
         .catch(function (error) {
           console.error(error);
@@ -54,21 +53,19 @@ const DetalleVenta = () => {
 
   const guardar = async () => {
     const options = {
-      method: "PUT",
-      url: `https://api.appery.io/rest/1/db/collections/Ventas/${id}`,
+      method: "PATCH",
+      url: `http://localhost:5000/Ventas/${id}`,
       headers: {
-        "X-Appery-Database-Id": "615884472e22d70eed30f6a8",
         "Content-Type": "application/json",
       },
       data: {
         Nombre: nombre,
         Quantity: cantidad,
         ValuePerUnit: valor,
-        Fecha: fecha,
+        fecha: fecha,
         Total: total,
         NombreCliente: nomcliente,
-        IdCliente: idCliente
-
+        IdCliente: idCliente,
       },
     };
 

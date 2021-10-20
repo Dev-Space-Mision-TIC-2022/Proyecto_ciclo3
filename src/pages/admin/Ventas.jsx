@@ -3,7 +3,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import "./Main.css";
-import { Dialog, Tooltip } from '@material-ui/core';
+import { Dialog, Tooltip } from "@material-ui/core";
 import _, { filter } from "underscore";
 
 const Ventas = () => {
@@ -13,9 +13,8 @@ const Ventas = () => {
   const ObtenerVentas = async () => {
     const options = {
       method: "GET",
-      url: "https://api.appery.io/rest/1/db/collections/Ventas/",
+      url: "http://localhost:5000/Ventas",
       headers: {
-        "X-Appery-Database-Id": "615884472e22d70eed30f6a8",
         "Content-Type": "application/json",
       },
     };
@@ -138,7 +137,7 @@ const Ventas = () => {
                         nombre={venta.Name}
                         valor={venta.ValuePerUnit}
                         cantidad={venta.Quantity}
-                        fecha={venta._createdAt}
+                        fecha={venta.fecha}
                         total={venta.ValuePerUnit * venta.Quantity}
                         id={venta._id}
                         refresh={ObtenerVentas}
@@ -171,7 +170,7 @@ const TableItem = ({
   nombreCliente,
   total,
   id,
-  refresh
+  refresh,
 }) => {
   const borrarItem = async () => {
     Swal.fire({
@@ -187,9 +186,8 @@ const TableItem = ({
       if (result.isConfirmed) {
         const options = {
           method: "DELETE",
-          url: `https://api.appery.io/rest/1/db/collections/Ventas/${id}`,
+          url: `http://localhost:5000/Ventas/${id}`,
           headers: {
-            "X-Appery-Database-Id": "615884472e22d70eed30f6a8",
             "Content-Type": "application/json",
           },
         };
@@ -209,6 +207,8 @@ const TableItem = ({
     });
   };
 
+  var date = new Date(fecha);
+
   return (
     <tr className="bg-gray-800 text-gray-100">
       <td className="p-3 justify-center items-center">
@@ -225,22 +225,25 @@ const TableItem = ({
       <td className="p-3 justify-center items-center font-bold">
         <strong>$ {total}</strong>
       </td>
-      <td className="p-3 justify-center items-center">{fecha}</td>
+      <td className="p-3 justify-center items-center">{date.toDateString()}</td>
       <td className="p-3 justify-center items-center">
-      <Tooltip title='Editar Producto' arrow>
-        <Link to={`/admin/detalle-venta/${id}`}>
-          <i class="bx bx-edit-alt hover:text-yellow-300" aria-label="Editar"></i>
-        </Link>
+        <Tooltip title="Editar Producto" arrow>
+          <Link to={`/admin/detalle-venta/${id}`}>
+            <i
+              class="bx bx-edit-alt hover:text-yellow-300"
+              aria-label="Editar"
+            ></i>
+          </Link>
         </Tooltip>
-        <Tooltip title='Borrar Producto' arrow>
-        <button
-          className="pl-4"
-          onClick={(x) => {
-            borrarItem();
-          }}
-        >
-          <i className="bx bx-trash hover:text-red-600"></i>
-        </button>
+        <Tooltip title="Borrar Producto" arrow>
+          <button
+            className="pl-4"
+            onClick={(x) => {
+              borrarItem();
+            }}
+          >
+            <i className="bx bx-trash hover:text-red-600"></i>
+          </button>
         </Tooltip>
       </td>
     </tr>

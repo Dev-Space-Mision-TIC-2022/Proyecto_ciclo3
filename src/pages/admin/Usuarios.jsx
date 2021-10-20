@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import "./Main.css";
 import _, { filter } from "underscore";
-import { Dialog, Tooltip } from '@material-ui/core';
+import { Dialog, Tooltip } from "@material-ui/core";
 
 const Usuarios = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
@@ -13,9 +13,8 @@ const Usuarios = () => {
   const ObtenerUsuarios = async () => {
     const options = {
       method: "GET",
-      url: " https://api.appery.io/rest/1/db/collections/Usuarios/",
+      url: "http://localhost:5000/Usuarios",
       headers: {
-        "X-Appery-Database-Id": "615884472e22d70eed30f6a8",
         "Content-Type": "application/json",
       },
     };
@@ -69,7 +68,8 @@ const Usuarios = () => {
                   aplicarFiltro(x.target.value);
                   if (x.target.value.length == 0) {
                     limpiarFiltro();
-                }}}
+                  }
+                }}
                 type="search"
                 class="w-full px-4 py-1 text-gray-900 rounded-full focus:outline-none"
                 placeholder="Search"
@@ -126,7 +126,7 @@ const Usuarios = () => {
                       <TableItem
                         Id={user._id}
                         nombre={user.Nombre}
-                        userName={user.userName}
+                        userName={user.UserName}
                         rol={user.Rol}
                         estado={user.Estado}
                         refresh={ObtenerUsuarios}
@@ -137,7 +137,7 @@ const Usuarios = () => {
               </table>
             </div>
             <div>
-              <Link to="/admin/crear-venta">
+              <Link to="/admin/crear-usuario">
                 <button className="mt-5 p-2 pl-5 pr-5 bg-green-300 text-gray-800 hover:bg-green-800 hover:text-gray-200 text-lg rounded-lg focus:border-4 border-blue-300">
                   Agregar Usuario
                 </button>
@@ -151,41 +151,40 @@ const Usuarios = () => {
 };
 
 const TableItem = ({ Id, nombre, userName, rol, estado, refresh }) => {
-    const borrarItem = async () => {
-        Swal.fire({
-          title: `Estas seguro de borrar el Usuario ${userName}?`,
-          text: "Esta acción no se puede deshacer",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Si, borrar!",
-          showLoaderOnConfirm: true,
-        }).then(async (result) => {
-          if (result.isConfirmed) {
-            const options = {
-              method: "DELETE",
-              url: `https://api.appery.io/rest/1/db/collections/Usuarios/${Id}`,
-              headers: {
-                "X-Appery-Database-Id": "615884472e22d70eed30f6a8",
-                "Content-Type": "application/json",
-              },
-            };
-            await axios
-              .request(options)
-              .then(function (response) {
-                Swal.fire("Borrado!", "El Usuario ha sido borrado", "success").then(
-                  (x) => {
-                    refresh();
-                  }
-                );
-              })
-              .catch(function (error) {
-                console.error(error);
-              });
-          }
-        });
-      };
+  const borrarItem = async () => {
+    Swal.fire({
+      title: `Estas seguro de borrar el Usuario ${userName}?`,
+      text: "Esta acción no se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, borrar!",
+      showLoaderOnConfirm: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const options = {
+          method: "DELETE",
+          url: `http://localhost:5000/Usuarios/${Id}`,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+        await axios
+          .request(options)
+          .then(function (response) {
+            Swal.fire("Borrado!", "El Usuario ha sido borrado", "success").then(
+              (x) => {
+                refresh();
+              }
+            );
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      }
+    });
+  };
   return (
     <tr className="bg-gray-800 text-gray-100">
       <td className="p-3 justify-center items-center">
@@ -200,20 +199,23 @@ const TableItem = ({ Id, nombre, userName, rol, estado, refresh }) => {
       <td className="p-3 justify-center items-center">{rol}</td>
       <td className="p-3 justify-center items-center font-bold">{estado}</td>
       <td className="p-3 justify-center items-center">
-      <Tooltip title='Editar Usuario' arrow>
-        <Link to={`/admin/detalle-usuario/${Id}`}>
-          <i class="bx bx-edit-alt hover:text-yellow-300" aria-label="Editar"></i>
-        </Link>
+        <Tooltip title="Editar Usuario" arrow>
+          <Link to={`/admin/detalle-usuario/${Id}`}>
+            <i
+              class="bx bx-edit-alt hover:text-yellow-300"
+              aria-label="Editar"
+            ></i>
+          </Link>
         </Tooltip>
-        <Tooltip title='Borrar Usuario' arrow>
-        <button
-          className="pl-4"
-          onClick={(x) => {
-            borrarItem();
-          }}
-        >
-          <i className="bx bx-trash hover:text-red-600"></i>
-        </button>
+        <Tooltip title="Borrar Usuario" arrow>
+          <button
+            className="pl-4"
+            onClick={(x) => {
+              borrarItem();
+            }}
+          >
+            <i className="bx bx-trash hover:text-red-600"></i>
+          </button>
         </Tooltip>
       </td>
     </tr>
