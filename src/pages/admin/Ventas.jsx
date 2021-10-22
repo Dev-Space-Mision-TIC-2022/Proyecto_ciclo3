@@ -13,7 +13,7 @@ const Ventas = () => {
   const ObtenerVentas = async () => {
     const options = {
       method: "GET",
-      url: "http://localhost:5000/Ventas",
+      url: "https://thawing-crag-36588.herokuapp.com/Ventas",
       headers: {
         "Content-Type": "application/json",
       },
@@ -186,7 +186,7 @@ const TableItem = ({
       if (result.isConfirmed) {
         const options = {
           method: "DELETE",
-          url: `http://localhost:5000/Ventas/${id}`,
+          url: `https://thawing-crag-36588.herokuapp.com/Ventas/${id}`,
           headers: {
             "Content-Type": "application/json",
           },

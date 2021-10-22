@@ -13,7 +13,7 @@ const Usuarios = () => {
   const ObtenerUsuarios = async () => {
     const options = {
       method: "GET",
-      url: "http://localhost:5000/Usuarios",
+      url: "https://thawing-crag-36588.herokuapp.com/Usuarios",
       headers: {
         "Content-Type": "application/json",
       },
@@ -165,7 +165,7 @@ const TableItem = ({ Id, nombre, userName, rol, estado, refresh }) => {
       if (result.isConfirmed) {
         const options = {
           method: "DELETE",
-          url: `http://localhost:5000/Usuarios/${Id}`,
+          url: `https://thawing-crag-36588.herokuapp.com/Usuarios/${Id}`,
           headers: {
             "Content-Type": "application/json",
           },

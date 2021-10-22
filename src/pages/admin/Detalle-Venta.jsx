@@ -21,7 +21,7 @@ const DetalleVenta = () => {
     const ObtenerVenta = async () => {
       const options = {
         method: "GET",
-        url: `http://localhost:5000/Ventas/${id}`,
+        url: `https://thawing-crag-36588.herokuapp.com/Ventas/${id}`,
         headers: {
           "Content-Type": "application/json",
         },
@@ -54,7 +54,7 @@ const DetalleVenta = () => {
   const guardar = async () => {
     const options = {
       method: "PATCH",
-      url: `http://localhost:5000/Ventas/${id}`,
+      url: `https://thawing-crag-36588.herokuapp.com/Ventas/${id}`,
       headers: {
         "Content-Type": "application/json",
       },

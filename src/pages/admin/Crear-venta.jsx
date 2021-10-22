@@ -15,7 +15,7 @@ const CrearVenta = () => {
   const guardar = async () => {
     const options = {
       method: "POST",
-      url: "http://localhost:5000/Ventas/",
+      url: "https://thawing-crag-36588.herokuapp.com/Ventas/",
       headers: {
         "Content-Type": "application/json",
       },

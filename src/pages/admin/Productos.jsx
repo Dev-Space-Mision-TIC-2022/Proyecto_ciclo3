@@ -19,7 +19,7 @@ const Productos = () => {
   const ObtenerProductos = async () => {
     const options = {
       method: "GET",
-      url: "http://localhost:5000/Productos/",
+      url: "https://thawing-crag-36588.herokuapp.com/Productos/",
       headers: {
         "Content-Type": "application/json",
       },
@@ -162,7 +162,7 @@ const TableItem = ({ nombre, valor, inventario, desc, Id, refresh }) => {
       if (result.isConfirmed) {
         const options = {
           method: "DELETE",
-          url: `http://localhost:5000/Productos/${Id}`,
+          url: `https://thawing-crag-36588.herokuapp.com/Productos/${Id}`,
           headers: {
             "Content-Type": "application/json",
           },

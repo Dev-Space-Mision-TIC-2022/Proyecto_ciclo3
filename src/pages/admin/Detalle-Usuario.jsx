@@ -18,7 +18,7 @@ const DetalleUsuario = () => {
     const ObtenerUsuario = async () => {
       const options = {
         method: "GET",
-        url: `http://localhost:5000/Usuarios/${id}`,
+        url: `https://thawing-crag-36588.herokuapp.com/Usuarios/${id}`,
         headers: {
           "Content-Type": "application/json",
         },
@@ -47,7 +47,7 @@ const DetalleUsuario = () => {
   const guardar = async () => {
     const options = {
       method: "PATCH",
-      url: `http://localhost:5000/Usuarios/${id}`,
+      url: `https://thawing-crag-36588.herokuapp.com/Usuarios/${id}`,
       headers: {
         "Content-Type": "application/json",
       },
