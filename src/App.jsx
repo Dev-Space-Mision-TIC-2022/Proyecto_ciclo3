@@ -13,6 +13,7 @@ import DetalleProducto from "./pages/admin/Detalle-producto";
 import DetalleVenta from "./pages/admin/Detalle-Venta";
 import { Auth0Provider } from "@auth0/auth0-react";
 import CrearUsuario from "./pages/admin/Crear-Usuario";
+import Adminmain from "./pages/admin/Adminmain";
 
 function App() {
   return (
