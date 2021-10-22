@@ -73,7 +73,7 @@ function App() {
                 </Route>
                 <Route path="/admin">
                   <Admin>
-                    <div>Admin Main</div>
+                    <Adminmain/>
                   </Admin>
                 </Route>
               </Switch>
