@@ -19,7 +19,7 @@ function App() {
     <Auth0Provider
       domain="proyecto-logitech-misiontic.us.auth0.com"
       clientId="68pjqQan9oQ8JMMczyBpy5xpRyF1pVqn"
-      redirectUri={window.location.origin + "/admin"}
+      redirectUri='https://pure-gorge-25368.herokuapp.com/admin'
     >
       <div className="App">
         <Router>
