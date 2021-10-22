@@ -19,7 +19,7 @@ const Productos = () => {
   const ObtenerProductos = async () => {
     const options = {
       method: "GET",
-      url: "https://thawing-crag-36588.herokuapp.com/Productos/",
+      url: "https://thawing-crag-36588.herokuapp.com/Productos",
       headers: {
         "Content-Type": "application/json",
       },

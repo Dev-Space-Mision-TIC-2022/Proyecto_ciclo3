@@ -15,7 +15,7 @@ const CrearUsuario = () => {
   const guardar = async () => {
     const options = {
       method: "POST",
-      url: `https://thawing-crag-36588.herokuapp.com/Usuarios/`,
+      url: `https://thawing-crag-36588.herokuapp.com/Usuarios`,
       headers: {
         "Content-Type": "application/json",
       },

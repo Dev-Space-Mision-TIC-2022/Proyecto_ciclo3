@@ -11,7 +11,7 @@ const CrearProducto = () => {
   const guardar = async () => {
     const options = {
       method: "POST",
-      url: "https://thawing-crag-36588.herokuapp.com/Productos/",
+      url: "https://thawing-crag-36588.herokuapp.com/Productos",
       headers: {
         "Content-Type": "application/json",
       },
