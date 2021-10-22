@@ -1,19 +1,16 @@
-import React from 'react';
+import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
+const PrivateRoute = ({ children }) => {
+  const { isAuthenticated, isloading } = useAuth0();
 
-const PrivateRoute = ({children}) => {
-    const {isAuthenticated, isloading} = useAuth0();
+  if (isloading) return <div>Loading...</div>;
 
-    if (isloading) return <div>Loading...</div>
+  return isAuthenticated ? (
+    <>{children}</>
+  ) : (
+    <div className="font-semibold text-center text-8xl"></div>
+  );
+};
 
-    
-
-    return isAuthenticated ?(
-        <>{children}</>
-        
-    ): (<div className= "font-semibold text-center text-8xl"></div>)
-}
-
-export default PrivateRoute
-
+export default PrivateRoute;
