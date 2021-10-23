@@ -22,6 +22,7 @@ const Productos = () => {
       url: "https://thawing-crag-36588.herokuapp.com/Productos",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "https://pure-gorge-25368.herokuapp.com"
       },
     };
     await axios
